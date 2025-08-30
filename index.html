@@ -135,8 +135,16 @@
         font-size: 18px;
       }
       
+      .download-fallback h3 {
+        font-size: 16px;
+      }
+      
       .download-fallback p {
-        font-size: 14px;
+        font-size: 13px;
+      }
+      
+      .portfolio-image {
+        max-width: 200px;
       }
     }
 
@@ -161,11 +169,35 @@
     
     <!-- Bouton de téléchargement de secours pour mobile -->
     <div class="download-fallback">
-      <h2>📱 Version Mobile</h2>
-      <p>Pour une meilleure expérience sur mobile, téléchargez directement le PDF :</p>
-      <a href="Gustavo_CASAROTTO_Portfolio.pdf" class="download-btn" download>
-        📥 Télécharger le Portfolio
-      </a>
+      <!-- Image du portfolio -->
+      <img src="portfolio-preview.jpg" alt="Portfolio Preview" class="portfolio-image" onerror="this.style.display='none'">
+      
+      <!-- Version française -->
+      <div class="language-section">
+        <h3>📱 Version Mobile</h3>
+        <p>Pour une meilleure expérience sur mobile, téléchargez directement le PDF :</p>
+        <a href="Gustavo_CASAROTTO_Portfolio.pdf" class="download-btn" download>
+          📥 Télécharger le Portfolio
+        </a>
+      </div>
+      
+      <!-- Version anglaise -->
+      <div class="language-section">
+        <h3>📱 Mobile Version</h3>
+        <p>For a better mobile experience, download the PDF directly:</p>
+        <a href="Gustavo_CASAROTTO_Portfolio.pdf" class="download-btn" download>
+          📥 Download Portfolio
+        </a>
+      </div>
+      
+      <!-- Version chinoise -->
+      <div class="language-section">
+        <h3>📱 移动版本</h3>
+        <p>为获得更好的移动体验，请直接下载PDF：</p>
+        <a href="Gustavo_CASAROTTO_Portfolio.pdf" class="download-btn" download>
+          📥 下载作品集
+        </a>
+      </div>
     </div>
   </div>
 
