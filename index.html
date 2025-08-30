@@ -15,6 +15,7 @@
       height: 100%;
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
+      overflow: hidden; /* Empêche le scroll */
     }
 
     .container {
@@ -36,129 +37,93 @@
       border: none;
     }
 
-    /* Bouton de téléchargement de secours */
-    .download-fallback {
+    /* Page mobile fixe avec image */
+    .mobile-view {
       display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       text-align: center;
-      padding: 30px 20px;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .portfolio-preview {
       background: white;
       border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      max-width: 350px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      max-width: 300px;
       width: 90%;
     }
 
     .portfolio-image {
       width: 100%;
-      max-width: 250px;
-      height: auto;
+      height: 400px;
+      object-fit: cover;
       border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       margin-bottom: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .language-section {
+    .mobile-content h2 {
+      color: white;
+      font-size: 24px;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .mobile-content p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
       margin-bottom: 25px;
+      line-height: 1.5;
     }
 
-    .language-section h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-      color: #333;
-    }
-
-    .language-section p {
-      font-size: 14px;
-      color: #666;
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-
-    .download-btn {
+    .open-pdf-btn {
       display: inline-block;
-      padding: 12px 25px;
-      background-color: #007bff;
+      padding: 15px 30px;
+      background-color: #28a745;
       color: white;
       text-decoration: none;
-      border-radius: 8px;
-      font-size: 14px;
-      margin: 5px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: bold;
       transition: all 0.3s;
-      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+      box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
+      border: 2px solid transparent;
     }
 
-    .download-btn:hover {
-      background-color: #0056b3;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+    .open-pdf-btn:hover {
+      background-color: #218838;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(40, 167, 69, 0.4);
+    }
+
+    .open-pdf-btn:active {
+      transform: translateY(-1px);
     }
 
     /* Media queries pour mobile */
     @media screen and (max-width: 768px) {
-      .container {
-        padding: 10px;
-      }
-      
-      iframe {
-        min-height: 80vh;
-      }
-      
-      /* Afficher le bouton de téléchargement sur très petits écrans */
-      .download-fallback {
-        display: block;
-        position: static;
-        transform: none;
-        margin: 20px auto;
-        max-width: 300px;
-      }
-      
       .pdf-container {
-        height: auto;
-        min-height: 80vh;
-      }
-    }
-
-    @media screen and (max-width: 480px) {
-      .container {
-        padding: 5px;
+        display: none;
       }
       
-      iframe {
-        min-height: 70vh;
-      }
-      
-      .download-fallback h2 {
-        font-size: 18px;
-      }
-      
-      .download-fallback h3 {
-        font-size: 16px;
-      }
-      
-      .download-fallback p {
-        font-size: 13px;
-      }
-      
-      .portfolio-image {
-        max-width: 200px;
-      }
-    }
-
-    /* Styles pour améliorer l'affichage PDF sur mobile */
-    @media screen and (max-width: 768px) {
-      iframe {
-        -webkit-overflow-scrolling: touch;
-        overflow: auto;
+      .mobile-view {
+        display: flex;
       }
     }
   </style>
 </head>
 <body>
   <div class="container">
+    <!-- Vue desktop avec iframe -->
     <div class="pdf-container">
       <iframe 
         src="Gustavo_CASAROTTO_Portfolio.pdf#toolbar=1&navpanes=0&scrollbar=1&page=1&view=FitH" 
@@ -167,60 +132,34 @@
       </iframe>
     </div>
     
-    <!-- Bouton de téléchargement de secours pour mobile -->
-    <div class="download-fallback">
-      <!-- Image du portfolio -->
-      <img src="portfolio-preview.jpg" alt="Portfolio Preview" class="portfolio-image" onerror="this.style.display='none'">
-      
-      <!-- Version française -->
-      <div class="language-section">
-        <h3>📱 Version Mobile</h3>
-        <p>Pour une meilleure expérience sur mobile, téléchargez directement le PDF :</p>
-        <a href="Gustavo_CASAROTTO_Portfolio.pdf" class="download-btn" download>
-          📥 Télécharger le Portfolio
-        </a>
+    <!-- Vue mobile avec image et bouton -->
+    <div class="mobile-view">
+      <div class="portfolio-preview">
+        <img src="portfolio-preview.jpg" alt="Portfolio Preview" class="portfolio-image" 
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2Y4ZjlmYSIvPjx0ZXh0IHg9IjE1MCIgeT0iMjAwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkd1c3Rhdm8gQ0FTQVJPVFRPPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMjMwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBvcnRmb2xpbzwvdGV4dD48L3N2Zz4='">
       </div>
       
-      <!-- Version anglaise -->
-      <div class="language-section">
-        <h3>📱 Mobile Version</h3>
-        <p>For a better mobile experience, download the PDF directly:</p>
-        <a href="Gustavo_CASAROTTO_Portfolio.pdf" class="download-btn" download>
-          📥 Download Portfolio
-        </a>
-      </div>
-      
-      <!-- Version chinoise -->
-      <div class="language-section">
-        <h3>📱 移动版本</h3>
-        <p>为获得更好的移动体验，请直接下载PDF：</p>
-        <a href="Gustavo_CASAROTTO_Portfolio.pdf" class="download-btn" download>
-          📥 下载作品集
+      <div class="mobile-content">
+        <h2>📱 Mobile Version</h2>
+        <p>Tap the button below to open the portfolio in your device's PDF viewer for the best experience.</p>
+        <a href="Gustavo_CASAROTTO_Portfolio.pdf" class="open-pdf-btn" target="_blank">
+          📄 Open Portfolio
         </a>
       </div>
     </div>
   </div>
 
   <script>
-    // Script pour détecter si le PDF se charge correctement sur mobile
+    // Redirection automatique sur mobile (optionnelle)
     window.addEventListener('load', function() {
-      const iframe = document.querySelector('iframe');
-      const fallback = document.querySelector('.download-fallback');
-      
-      // Sur mobile, vérifier si l'iframe est bien supportée
+      // Si vous voulez une redirection automatique, décommentez ces lignes :
+      /*
       if (window.innerWidth <= 768) {
-        iframe.addEventListener('error', function() {
-          iframe.style.display = 'none';
-          fallback.style.display = 'block';
-        });
-        
-        // Timeout pour afficher le fallback si le PDF ne se charge pas
         setTimeout(function() {
-          if (iframe.contentDocument === null) {
-            fallback.style.display = 'block';
-          }
-        }, 3000);
+          window.open('Gustavo_CASAROTTO_Portfolio.pdf', '_blank');
+        }, 1000);
       }
+      */
     });
   </script>
 </body>
